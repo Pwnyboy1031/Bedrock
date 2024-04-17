@@ -5,7 +5,7 @@ import random
 
 class Deck:
     def __init__(self):
-        shovel_cards = [Shovel() for _ in range(10)]
+        shovel_cards = [Shovel() for _ in range(10)] #change back to 10
         pickaxe_cards = [Pickaxe() for _ in range(5)]
         self.cards = shovel_cards + pickaxe_cards
         

@@ -11,5 +11,6 @@ class Player:
     
     def display_hand(self):
         print(f"{self.name}'s hand:")
-        for card in self.hand:
-            print(card.name)
+        for index, card in enumerate(self.hand):
+            print(f"{index + 1}.  {card.name}")
+            

@@ -6,7 +6,6 @@ class GameState:
 
     def next_turn(self):
         self.current_player_index = (self.current_player_index + 1) % len(self.players)
-        return self.current_player()
     
     def current_player(self):
         return self.players[self.current_player_index]
