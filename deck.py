@@ -6,7 +6,6 @@ class Deck:
     def __init__(self):
         self.cards = initialize_cards()
         
-
     def add_card_to_top(self, card):
         self.cards.insert(0, card)
 

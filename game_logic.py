@@ -12,6 +12,9 @@ def reveal_cards(cards):
     for index, card in enumerate (cards):
         print(f"{index + 1}. {card.name}")
 
+def add_to_hoard(player, card):
+    player.hoard.append(card)
+    
 def play_cards(game_state, cards):
     for card in reversed(cards):
         card.apply_effect(game_state)

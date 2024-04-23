@@ -24,12 +24,12 @@ class ScryCard(Card):
                 print("Invalid selection Please select 1 or 2")
                 placement_selection = input()
             if placement_selection == '1':
-                print(f"Placed {selected_card} on top of deck")
+                print(f"Placed {selected_card.name} on top of deck")
                 game_state.deck.cards.remove(selected_card)
                 game_state.deck.add_card_to_top(selected_card)
                 options.remove(selected_card)
             else:
-                print(f"Placed {selected_card} on bottom of deck")
+                print(f"Placed {selected_card.name} on bottom of deck")
                 game_state.deck.add_card_to_bottom(selected_card)
                 game_state.deck.cards.remove(selected_card)
                 options.remove(selected_card)

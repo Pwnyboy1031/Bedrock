@@ -8,16 +8,13 @@ from player import Player
 import game_logic
 from spelunk_card import Spelunk
 from survey_card import Survey
+from treasure_cards import Ruby
 import random
 
-survey = Survey()
         
 def main():
     game_state = game_logic.initialize_game()
-    print(game_state.deck.cards)
-    survey.apply_effect(game_state)
-    print(game_state.deck.cards)
-
+    take_turn(game_state)
   
 
 
