@@ -6,25 +6,17 @@ from shovel_card import Shovel
 from pickaxe_card import Pickaxe
 from player import Player
 import game_logic
+from spelunk_card import Spelunk
+from survey_card import Survey
 import random
 
-# shovel_card = Shovel() 
-# pickaxe_card = Pickaxe()
-
-# shovel_cards = [Shovel() for _ in range(10)]
-# pickaxe_cards = [Pickaxe() for _ in range(5)]
-1
-
-
-
+survey = Survey()
         
 def main():
     game_state = game_logic.initialize_game()
-    #print(game_state.players, game_state.deck.cards)
-    game_state.players[0].display_hand()
-    game_state.players[1].display_hand()
-    take_turn(game_state)
-
+    print(game_state.deck.cards)
+    survey.apply_effect(game_state)
+    print(game_state.deck.cards)
 
   
 

@@ -7,6 +7,11 @@ def draw_card(game_state):
     game_state.current_player().add_card_to_hand(card)
     print(game_state.current_player().name,"drew:", card.name)
 
+def reveal_cards(cards):
+    print("Revealing cards:")
+    for index, card in enumerate (cards):
+        print(f"{index + 1}. {card.name}")
+
 def play_cards(game_state, cards):
     for card in reversed(cards):
         card.apply_effect(game_state)

@@ -1,16 +1,16 @@
 from card import Card
-from shovel_card import Shovel
-from pickaxe_card import Pickaxe
+from cards import initialize_cards
 import random
 
 class Deck:
     def __init__(self):
-        shovel_cards = [Shovel() for _ in range(10)] #change back to 10
-        pickaxe_cards = [Pickaxe() for _ in range(5)]
-        self.cards = shovel_cards + pickaxe_cards
+        self.cards = initialize_cards()
         
 
-    def add_card(self, card):
+    def add_card_to_top(self, card):
+        self.cards.insert(0, card)
+
+    def add_card_to_bottom(self, card):
         self.cards.append(card)
     
     def shuffle(self):
@@ -18,3 +18,7 @@ class Deck:
 
     def draw_card(self):
         return self.cards.pop(0)
+    
+    def reveal_top_cards(self, num_cards):
+        revealed_cards = self.cards[:num_cards]
+        return revealed_cards

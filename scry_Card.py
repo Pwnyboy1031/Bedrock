@@ -1,0 +1,36 @@
+from card import Card
+from game_state import GameState
+
+
+class ScryCard(Card):
+    def __init__(self, name, scry_number):
+        super().__init__(name, f"Scry {scry_number}")
+        self.scry_number = scry_number
+
+
+    def apply_effect(self, game_state):
+        from game_logic import reveal_cards
+        scry_number = self.scry_number
+        scryed_cards = game_state.deck.reveal_top_cards(scry_number)
+        options = list(scryed_cards)
+        for index, card in enumerate (scryed_cards):
+            print("Select a card")
+            reveal_cards(options)
+            selected_card = options[int(input()) - 1]
+            print(f"Would you like to place {selected_card.name} on:\n 1. Top of the deck\n 2. Bottom of the deck")
+            placement_selection = input()
+            # Check for valid placement selection
+            while placement_selection not in ['1', '2']:
+                print("Invalid selection Please select 1 or 2")
+                placement_selection = input()
+            if placement_selection == '1':
+                print(f"Placed {selected_card} on top of deck")
+                game_state.deck.cards.remove(selected_card)
+                game_state.deck.add_card_to_top(selected_card)
+                options.remove(selected_card)
+            else:
+                print(f"Placed {selected_card} on bottom of deck")
+                game_state.deck.add_card_to_bottom(selected_card)
+                game_state.deck.cards.remove(selected_card)
+                options.remove(selected_card)
+
