@@ -71,7 +71,7 @@ def validate_treasure(player, card_indices, game_state):
 
 def choose_cards_to_play(player, game_state):
     player.display_hand()
-    print(f"{game_state.phase}")
+    print(f"{game_state.phase} Phase")
     print("Enter selection for 1 card or 'selection, selection' for 2 cards.")
     user_selection = input().strip()
     if not user_selection:
