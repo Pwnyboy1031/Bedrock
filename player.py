@@ -14,6 +14,7 @@ class Player:
         print(f"{self.name}'s hand:")
         for index, card in enumerate(self.hand):
             print(f"{index + 1}.  {card.name}")
+        print()
     
     def display_hoard(self):
         print(f"{self.name}'s hoard:")

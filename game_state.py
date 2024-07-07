@@ -3,10 +3,14 @@ class GameState:
         self.players = players
         self.current_player_index = 0
         self.deck = deck
+        self.discard_pile = []
         self.scoreboard = {player.name: 0 for player in players}
+        self.phases = ["Treasure", "Main"]
+        self.phase = self.phases[0]
 
     def next_turn(self):
         self.current_player_index = (self.current_player_index + 1) % len(self.players)
+        
     
     def current_player(self):
         return self.players[self.current_player_index]
