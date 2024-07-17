@@ -16,12 +16,14 @@ def reveal_cards(cards):
 def add_to_hoard(player, card):
     player.hoard.append(card)
 
+def remove_from_hoard(player, card):
+    player.hoard.pop(card)
+
 def add_to_discard_pile(game_state, card):
     game_state.discard_pile.append(card)
     
 def play_cards(game_state, cards):
     for card in reversed(cards):
-        card.apply_effect(game_state)
         try:
             card_index = game_state.current_player().hand.index(card)
             print(game_state.current_player().name, "played:", card.name)
@@ -31,7 +33,7 @@ def play_cards(game_state, cards):
             game_state.current_player().hand.pop(card_index)
         except ValueError:
             print("Card not found in player's hand:", card)
-
+        card.apply_effect(game_state)
 def deal_starting_hands(game_state):
     for _ in range(10): 
         draw_card(game_state)
@@ -71,10 +73,10 @@ def validate_treasure(player, card_indices, game_state):
         print("Invalid input. You can play up to 2 treasure cards")
         return choose_cards_to_play(player, game_state)
     
-""" def validate_hoard(player, card_indices, game_state):
-    if len(card_indices) > player.hoard.length or any(not isinstance(player.hoard[(index)], Treasure) for index in card_indices):
+def validate_hoard(player, card_indices):
+    if len(card_indices) > len(player.hoard) or any(not isinstance(player.hoard[(index)], Treasure) for index in card_indices):
         print("Invalid selection. You can choose any number of treasures to remove from your hoard")
-        return() """
+        return(False)
 
 def choose_cards_to_play(player, game_state):
     player.display_hand()
@@ -84,7 +86,6 @@ def choose_cards_to_play(player, game_state):
     if not user_selection:
         return [] # return empty list if no input
     card_indices = [int(index) - 1 for index in user_selection.split(',')]
-    print(card_indices)
 
     # Check turn phase
     if game_state.phase == "Treasure":
