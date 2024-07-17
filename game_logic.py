@@ -15,6 +15,9 @@ def reveal_cards(cards):
 
 def add_to_hoard(player, card):
     player.hoard.append(card)
+
+def add_to_discard_pile(game_state, card):
+    game_state.discard_pile.append(card)
     
 def play_cards(game_state, cards):
     for card in reversed(cards):
@@ -23,8 +26,7 @@ def play_cards(game_state, cards):
             card_index = game_state.current_player().hand.index(card)
             print(game_state.current_player().name, "played:", card.name)
             print(f"{card.name}'s effect says: {card.effect}")
-            # add to discard pile
-            game_state.discard_pile.append(card)
+            add_to_discard_pile(game_state, card)
             # remove from hand
             game_state.current_player().hand.pop(card_index)
         except ValueError:
@@ -66,8 +68,13 @@ def validate_play(player, card_indices, game_state):
 
 def validate_treasure(player, card_indices, game_state):
     if len(card_indices) > 2 or any(not isinstance(player.hand[(index)], Treasure) for index in card_indices):
-        print("Invalid input. You can play up to 2 non-treasure cards")
+        print("Invalid input. You can play up to 2 treasure cards")
         return choose_cards_to_play(player, game_state)
+    
+""" def validate_hoard(player, card_indices, game_state):
+    if len(card_indices) > player.hoard.length or any(not isinstance(player.hoard[(index)], Treasure) for index in card_indices):
+        print("Invalid selection. You can choose any number of treasures to remove from your hoard")
+        return() """
 
 def choose_cards_to_play(player, game_state):
     player.display_hand()
