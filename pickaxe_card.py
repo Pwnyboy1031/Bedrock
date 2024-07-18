@@ -5,6 +5,6 @@ class Pickaxe(Card):
         super().__init__("Pickaxe", "Draw 3 cards")
 
     def apply_effect(self, game_state):
+        from game_logic import draw_card
         for _ in range(3):
-            card = game_state.deck.draw_card()
-            game_state.current_player().add_card_to_hand(card)
+            draw_card(game_state)

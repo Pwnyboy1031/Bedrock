@@ -7,6 +7,9 @@ class GameState:
         self.scoreboard = {player.name: 0 for player in players}
         self.phases = ["Treasure", "Main"]
         self.phase = self.phases[0]
+        self.bedrock_count = 0
+        self.bedrock_limit = len(players) + 1
+        self.game_over = False
 
     def next_turn(self):
         self.current_player_index = (self.current_player_index + 1) % len(self.players)

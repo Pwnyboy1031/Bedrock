@@ -5,8 +5,12 @@ from treasure_cards import Treasure
 
 def draw_card(game_state):
     card = game_state.deck.draw_card()
-    game_state.current_player().add_card_to_hand(card)
     print(game_state.current_player().name,"drew:", card.name)
+    if card.name == "Bedrock":
+        card.apply_effect(game_state)
+    game_state.current_player().add_card_to_hand(card)
+    
+
 
 def reveal_cards(cards):
     print("Revealing cards:")
@@ -20,7 +24,7 @@ def add_to_hoard(game_state, player, card):
 def remove_from_hoard(game_state, player, card):
     player.hoard.pop(card)
     game_state.update_scoreboard(player)
-    
+
 def add_to_discard_pile(game_state, card):
     game_state.discard_pile.append(card)
     
@@ -137,10 +141,13 @@ def take_turn(game_state):
 
     game_state.next_turn()
     print(game_state.discard_pile)
-    take_turn(game_state)
 
-    
-
-def resolve_effects(game_state):
-    #resolution of effects after playing cards?
-    pass
+def game_over(game_state):
+    game_state.game_over == True
+    print("Game over!")
+    game_state.update_scoreboard()
+    for player in game_state.scoreboard:
+        if player > player: 
+            winner = player.name
+    print(f"The winner is {winner}!")
+    wait = input("End.")
