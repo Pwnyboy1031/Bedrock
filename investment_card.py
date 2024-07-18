@@ -23,4 +23,4 @@ class Investment(Card):
             draw_card(game_state)
             
         for index in sorted(card_indices, reverse=True): #clean up the hoard, reverse hoard so that the indexes leave no spaces
-            remove_from_hoard(game_state.current_player(), index)
+            remove_from_hoard(game_state, game_state.current_player(), index)

@@ -9,8 +9,7 @@ class Treasure(Card):
 
     def apply_effect(self, game_state):
         from game_logic import add_to_hoard
-        add_to_hoard(game_state.current_player(), self)
-        game_state.update_scoreboard(game_state.current_player().name, self.points)
+        add_to_hoard(game_state, game_state.current_player(), self)
     
 class Ruby(Treasure):
     def __init__(self):

@@ -13,12 +13,14 @@ def reveal_cards(cards):
     for index, card in enumerate (cards):
         print(f"{index + 1}. {card.name}")
 
-def add_to_hoard(player, card):
+def add_to_hoard(game_state, player, card):
     player.hoard.append(card)
+    game_state.update_scoreboard(player)
 
-def remove_from_hoard(player, card):
+def remove_from_hoard(game_state, player, card):
     player.hoard.pop(card)
-
+    game_state.update_scoreboard(player)
+    
 def add_to_discard_pile(game_state, card):
     game_state.discard_pile.append(card)
     
