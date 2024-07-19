@@ -8,7 +8,7 @@ class GameState:
         self.phases = ["Treasure", "Main"]
         self.phase = self.phases[0]
         self.bedrock_count = 0
-        self.bedrock_limit = len(players) + 1
+        self.bedrock_limit = len(players)
         self.game_over = False
 
     def next_turn(self):

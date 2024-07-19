@@ -1,3 +1,4 @@
+import sys
 from player import Player
 from deck import Deck
 from game_state import GameState
@@ -144,10 +145,13 @@ def take_turn(game_state):
 
 def game_over(game_state):
     game_state.game_over == True
+    previous_score = 0
     print("Game over!")
-    game_state.update_scoreboard()
+    for player in game_state.players:
+        game_state.update_scoreboard(player)
     for player in game_state.scoreboard:
-        if player > player: 
-            winner = player.name
+        if game_state.scoreboard.get(player) > previous_score: 
+            winner = player
+        previous_score = game_state.scoreboard.get(player)
     print(f"The winner is {winner}!")
-    wait = input("End.")
+    sys.exit()
