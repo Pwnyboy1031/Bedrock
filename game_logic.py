@@ -4,6 +4,7 @@ from deck import Deck
 from game_state import GameState
 from treasure_cards import Treasure
 
+
 def draw_card(game_state):
     card = game_state.deck.draw_card()
     print(game_state.current_player().name,"drew:", card.name)
@@ -41,11 +42,17 @@ def play_cards(game_state, cards):
         except ValueError:
             print("Card not found in player's hand:", card)
         card.apply_effect(game_state)
+
 def deal_starting_hands(game_state):
     for _ in range(10): 
         draw_card(game_state)
         game_state.next_turn()
-
+    if game_state.bedrock_count >= 1:
+        from main import main
+        print("Bedrock drawn in opening hand, restarting game")
+        # restart game if bedrock is drawn
+        main()
+        return
 
 def initialize_game():
     # Define players

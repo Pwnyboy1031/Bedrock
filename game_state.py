@@ -10,6 +10,7 @@ class GameState:
         self.bedrock_count = 0
         self.bedrock_limit = len(players)
         self.game_over = False
+        self.deep_exploration_active = False
 
     def next_turn(self):
         self.current_player_index = (self.current_player_index + 1) % len(self.players)

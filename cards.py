@@ -6,6 +6,7 @@ from prospect_card import Prospect
 from investment_card import Investment
 from treasure_cards import *
 from bedrock_card import Bedrock
+from deep_exploration_card import Deep_Exploration
 
 def initialize_cards():
     shovel_cards = [Shovel() for _ in range(10)] 
@@ -19,7 +20,8 @@ def initialize_cards():
     diamond_cards = [Diamond() for _ in range(1)]
     investment_cards = [Investment()]
     bedrock_cards = [Bedrock()]
+    deep_exploration_card = [Deep_Exploration()]
 
 
 
-    return shovel_cards + pickaxe_cards + spelunk_cards + survey_cards + prospect_cards + ruby_cards + sapphire_cards + emerald_cards + diamond_cards + investment_cards + bedrock_cards
+    return shovel_cards + pickaxe_cards + spelunk_cards + survey_cards + prospect_cards + ruby_cards + sapphire_cards + emerald_cards + diamond_cards + investment_cards + bedrock_cards + deep_exploration_card
