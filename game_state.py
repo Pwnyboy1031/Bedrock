@@ -33,3 +33,10 @@ class GameState:
         for index, card in enumerate(self.discard_pile):
             print(f"{index + 1}.  {card.name}")
         print()
+
+    def display_opponents(self):
+        print("Opponents:")
+        for index, player, in enumerate(self.players):
+            if index != self.current_player_index:
+                print(f"{index + 1}.  {player.name}")
+        print()    

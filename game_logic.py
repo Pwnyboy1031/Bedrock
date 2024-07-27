@@ -10,6 +10,7 @@ def draw_card(game_state):
     print(game_state.current_player().name,"drew:", card.name)
     if card.name == "Bedrock":
         card.apply_effect(game_state)
+        return
     game_state.current_player().add_card_to_hand(card)
     
 
@@ -36,9 +37,8 @@ def play_cards(game_state, cards):
             card_index = game_state.current_player().hand.index(card)
             print(game_state.current_player().name, "played:", card.name)
             print(f"{card.name}'s effect says: {card.effect}")
-            if (isinstance(card, Treasure)):
-                return
-            add_to_discard_pile(game_state, card)
+            if (not isinstance(card, Treasure)):
+                add_to_discard_pile(game_state, card)
             # remove from hand
             game_state.current_player().hand.pop(card_index)
         except ValueError:
@@ -158,9 +158,12 @@ def game_over(game_state):
     print("Game over!")
     for player in game_state.players:
         game_state.update_scoreboard(player)
-    for player in game_state.scoreboard:
+    for player in game_state.players:
         if game_state.scoreboard.get(player) > previous_score: 
-            winner = player
+            winner = player.name
         previous_score = game_state.scoreboard.get(player)
-    print(f"The winner is {winner}!")
+    if winner:
+        print(f"The winner is {winner}!")
+    else:
+        print("Tie Game!")
     sys.exit()
