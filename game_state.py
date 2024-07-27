@@ -28,3 +28,8 @@ class GameState:
     def get_scores(self):
         return self.scoreboard
     
+    def display_discard_pile(self):
+        print("Discard Pile:")
+        for index, card in enumerate(self.discard_pile):
+            print(f"{index + 1}.  {card.name}")
+        print()

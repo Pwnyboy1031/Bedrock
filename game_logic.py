@@ -36,6 +36,8 @@ def play_cards(game_state, cards):
             card_index = game_state.current_player().hand.index(card)
             print(game_state.current_player().name, "played:", card.name)
             print(f"{card.name}'s effect says: {card.effect}")
+            if (isinstance(card, Treasure)):
+                return
             add_to_discard_pile(game_state, card)
             # remove from hand
             game_state.current_player().hand.pop(card_index)
