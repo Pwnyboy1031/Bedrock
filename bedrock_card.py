@@ -8,6 +8,7 @@ class Bedrock(Card):
     def apply_effect(self, game_state):
         from game_logic import draw_card, game_over
         print("BEDROCK!")
+        print(f"BEDROCK COUNT IS NOW {game_state.bedrock_count}")
         if game_state.deep_exploration_active == True:
             game_state.deck.add_card_to_top(game_state.deck, self)
             game_state.deck.shuffle()

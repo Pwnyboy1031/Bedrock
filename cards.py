@@ -9,6 +9,7 @@ from bedrock_card import Bedrock
 from deep_exploration_card import Deep_Exploration
 from back_to_basics import Back_To_Basics
 from trade_secrets import Trade_Secrets
+from tunnel_collapse import Tunnel_Collapse
 
 def initialize_cards():
     shovel_cards = [Shovel() for _ in range(10)] 
@@ -25,7 +26,8 @@ def initialize_cards():
     deep_exploration_card = [Deep_Exploration()]
     back_to_basics = [Back_To_Basics() for _ in range(2)]
     trade_secrets = [Trade_Secrets() for _ in range(2)]
+    tunnel_collapse = [Tunnel_Collapse() for _ in range(2)]
 
 
 
-    return shovel_cards + pickaxe_cards + spelunk_cards + survey_cards + prospect_cards + ruby_cards + sapphire_cards + emerald_cards + diamond_cards + investment_cards + bedrock_cards + deep_exploration_card + back_to_basics + trade_secrets
+    return shovel_cards + pickaxe_cards + spelunk_cards + survey_cards + prospect_cards + ruby_cards + sapphire_cards + emerald_cards + diamond_cards + investment_cards + bedrock_cards + deep_exploration_card + back_to_basics + trade_secrets + tunnel_collapse

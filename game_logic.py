@@ -159,7 +159,7 @@ def game_over(game_state):
     for player in game_state.players:
         game_state.update_scoreboard(player)
     for player in game_state.players:
-        if game_state.scoreboard.get(player) > previous_score: 
+        if (game_state.scoreboard.get(player) or 0) > previous_score: 
             winner = player.name
         previous_score = game_state.scoreboard.get(player)
     if winner:
