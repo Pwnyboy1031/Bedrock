@@ -16,7 +16,7 @@ class Investment(Card):
         if validate_hoard(game_state.current_player(), card_indices):
             self.apply_effect(game_state)
         for card in card_indices:
-            if super().check_hard_hat(game_state.current_player.hoard[card]) == True:
+            if self.check_hard_hat(game_state.current_player.hoard[card]) == True:
                 self.apply_effect(game_state)
         for index in card_indices: # add selections to discard and draw
             card = game_state.current_player().hoard[index]

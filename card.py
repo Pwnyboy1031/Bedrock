@@ -20,8 +20,8 @@ class Card:
     @staticmethod
     def check_hard_hat(target):
         from hard_hat_card import Hard_Hat 
-        if isinstance(target, Hard_Hat) in target.attachments:
-            print(f"{target.name} is protected by Hard Hat!, select a valid target")
-            return True
+        for attachment in target.attachments:
+            if isinstance(attachment, Hard_Hat):
+                print(f"{target.name} is protected by Hard Hat!, select a valid target")
+                return True
         return False
-        
