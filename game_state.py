@@ -25,6 +25,7 @@ class GameState:
             for treasure in player.hoard:
                 self.scoreboard[player.name] += treasure.points
         print(f"The scoreboard has been updated\n{self.scoreboard}")
+        print()
     
     def get_scores(self):
         return self.scoreboard

@@ -143,7 +143,6 @@ def take_turn(game_state):
         game_state.phase = game_state.phases[1]
     else: 
         selected_cards = [current_player.hand[index] for index in selected_indices]
-        print(selected_cards)
         play_cards(game_state, selected_cards)
         game_state.phase = game_state.phases[1]
 
@@ -158,7 +157,8 @@ def take_turn(game_state):
         
 
     game_state.next_turn()
-    print(game_state.discard_pile)
+    print()
+    game_state.display_discard_pile()
 
 def game_over(game_state):
     game_state.game_over = True
@@ -180,4 +180,5 @@ def game_over(game_state):
         print(f"The winner is {winner}!")
     else:
         print("Tie Game!")
+    wait = input()
     sys.exit()

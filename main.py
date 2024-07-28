@@ -9,7 +9,8 @@ import game_logic
 from spelunk_card import Spelunk
 from survey_card import Survey
 from treasure_cards import Ruby
-import random
+from menu import Menu
+import keyboard
 
         
 def main():
