@@ -13,6 +13,8 @@ from tunnel_collapse import Tunnel_Collapse
 from pilfer_card import Pilfer
 from hard_hat_card import Hard_Hat
 from earthquake_card import Earthquake
+from taxes_card import Taxes
+
 def initialize_cards():
     shovel_cards = [Shovel() for _ in range(10)] 
     pickaxe_cards = [Pickaxe() for _ in range(5)]
@@ -32,7 +34,8 @@ def initialize_cards():
     pilfer_cards = [Pilfer() for _ in range(2)]
     hard_hat_cards = [Hard_Hat() for _ in range(2)]
     earthquake_card = [Earthquake()]
+    taxes_cards = [Taxes() for _ in range(2)]
 
 
 
-    return shovel_cards + pickaxe_cards + spelunk_cards + survey_cards + prospect_cards + ruby_cards + sapphire_cards + emerald_cards + diamond_cards + investment_cards + bedrock_cards + deep_exploration_card + back_to_basics + trade_secrets + tunnel_collapse + pilfer_cards + hard_hat_cards + earthquake_card
+    return shovel_cards + pickaxe_cards + spelunk_cards + survey_cards + prospect_cards + ruby_cards + sapphire_cards + emerald_cards + diamond_cards + investment_cards + bedrock_cards + deep_exploration_card + back_to_basics + trade_secrets + tunnel_collapse + pilfer_cards + hard_hat_cards + earthquake_card + taxes_cards

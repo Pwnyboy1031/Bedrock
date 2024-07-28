@@ -1,4 +1,5 @@
 from colorama import init, Fore, Style
+from hard_hat_card import Hard_Hat
 from treasure_cards import *
 
 init()
@@ -36,5 +37,7 @@ class Player:
             return Fore.GREEN + Style.BRIGHT
         if isinstance(card, Diamond):
             return Fore.CYAN + Style.BRIGHT
+        if isinstance(card, Hard_Hat):
+            return Fore.YELLOW + Style.BRIGHT
         else:
             return Fore.WHITE + Style.BRIGHT

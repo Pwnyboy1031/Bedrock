@@ -22,6 +22,5 @@ class Card:
         from hard_hat_card import Hard_Hat 
         for attachment in target.attachments:
             if isinstance(attachment, Hard_Hat):
-                print(f"{target.name} is protected by Hard Hat!, select a valid target")
                 return True
         return False
