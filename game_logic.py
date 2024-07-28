@@ -3,6 +3,7 @@ from player import Player
 from deck import Deck
 from game_state import GameState
 from treasure_cards import Treasure
+from hard_hat_card import Hard_Hat
 
 
 def draw_card(game_state):
@@ -35,15 +36,16 @@ def play_cards(game_state, cards):
     for card in reversed(cards):
         try:
             card_index = game_state.current_player().hand.index(card)
-            print(game_state.current_player().name, "played:", card.name)
-            print(f"{card.name}'s effect says: {card.effect}")
-            if (not isinstance(card, Treasure)):
-                add_to_discard_pile(game_state, card)
             # remove from hand
             game_state.current_player().hand.pop(card_index)
+            print(game_state.current_player().name, "played:", card.name)
+            print(f"{card.name}'s effect says: {card.effect}")
+            card.apply_effect(game_state)
+            if (not isinstance(card, Treasure) and not isinstance(card, Hard_Hat)):
+                add_to_discard_pile(game_state, card)
         except ValueError:
             print("Card not found in player's hand:", card)
-        card.apply_effect(game_state)
+        
 
 def deal_starting_hands(game_state):
     for _ in range(10): 
@@ -159,7 +161,7 @@ def game_over(game_state):
     for player in game_state.players:
         game_state.update_scoreboard(player)
     for player in game_state.players:
-        if game_state.scoreboard.get(player) or 0 > previous_score: 
+        if (game_state.scoreboard.get(player) or 0) > previous_score: 
             winner = player.name
         previous_score = game_state.scoreboard.get(player)
     if winner:

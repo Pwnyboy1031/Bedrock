@@ -6,6 +6,7 @@ class Treasure(Card):
         super().__init__(name, f"This Treasure is worth {points} point(s) at the end of the game if it is in your hoard")
         self.points = points
         self.name = name
+        self.attachments = []
 
     def apply_effect(self, game_state):
         from game_logic import add_to_hoard

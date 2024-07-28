@@ -17,3 +17,11 @@ class Card:
             user_selection = input().strip()
         selectedOpponent = game_state.players[int(user_selection)-1]
         return(selectedOpponent)
+    @staticmethod
+    def check_hard_hat(target):
+        from hard_hat_card import Hard_Hat 
+        if isinstance(target, Hard_Hat) in target.attachments:
+            print(f"{target.name} is protected by Hard Hat!, select a valid target")
+            return True
+        return False
+        
