@@ -27,7 +27,7 @@ def add_to_hoard(game_state, player, card):
 
 def remove_from_hoard(game_state, player, card):
     player.hoard.pop(card)
-    game_state.update_scoreboard(player)
+    game_state.update_scoreboard()
 
 def add_to_discard_pile(game_state, card):
     game_state.discard_pile.append(card)

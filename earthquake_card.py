@@ -8,9 +8,9 @@ class Earthquake(Card):
     
     def apply_effect(self, game_state):
         for player in game_state.players:
-            for card in player.hand:
+            for card in player.hand[:]:
                 game_state.deck.add_card_to_top(card)
-                player.hand.pop(card)
+            player.hand.clear()
         game_state.deck.shuffle()
         for _ in range(5):
             for player in game_state.players:

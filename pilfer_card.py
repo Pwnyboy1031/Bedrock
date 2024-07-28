@@ -13,7 +13,7 @@ class Pilfer(Card):
             return 
         
         unprotected_treasures = [treasure for treasure in opponent.hoard if not self.check_hard_hat(treasure)]
-        
+
         if not unprotected_treasures:
             print("All treasures in opponent's hoard are protected by Hard Hat.")
             return
@@ -22,5 +22,5 @@ class Pilfer(Card):
         opponent.hoard.remove(random_treasure)
         game_state.current_player().hoard.append(random_treasure)
 
-        print(f"{game_state.current_player().name} Stole {random_treasure} from {opponent.name}")
+        print(f"{game_state.current_player().name} Stole {random_treasure.name} from {opponent.name}")
         print(f"Debug Message: {game_state.current_player().name}'s hoard: {[t.name for t in game_state.current_player().hoard]}")

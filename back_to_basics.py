@@ -4,7 +4,7 @@ import player
 
 class Back_To_Basics(Card):
     def __init__(self):
-        super().__init__("Back To Basics", "Add a card form the discard pile to your hand")
+        super().__init__("Back To Basics", "Add a card from the discard pile to your hand")
 
     def apply_effect(self, game_state):
         game_state.display_discard_pile()
