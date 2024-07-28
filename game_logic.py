@@ -23,7 +23,7 @@ def reveal_cards(cards):
 
 def add_to_hoard(game_state, player, card):
     player.hoard.append(card)
-    game_state.update_scoreboard(player)
+    game_state.update_scoreboard()
 
 def remove_from_hoard(game_state, player, card):
     player.hoard.pop(card)
@@ -48,15 +48,16 @@ def play_cards(game_state, cards):
         
 
 def deal_starting_hands(game_state):
-    for _ in range(10): 
-        draw_card(game_state)
-        game_state.next_turn()
-    if game_state.bedrock_count >= 1:
-        from main import main
-        print("Bedrock drawn in opening hand, restarting game")
-        # restart game if bedrock is drawn
-        main()
-        return
+    for _ in range(5):
+        for player in game_state.players: 
+            draw_card(game_state)
+            game_state.next_turn()
+            if game_state.bedrock_count >= 1:
+                from main import main
+                print("Bedrock drawn in opening hand, restarting game")
+                # restart game if bedrock is drawn
+                main()
+                return
 
 def initialize_game():
     # Define players
@@ -160,15 +161,21 @@ def take_turn(game_state):
     print(game_state.discard_pile)
 
 def game_over(game_state):
-    game_state.game_over == True
+    game_state.game_over = True
     previous_score = 0
+    winner = None
     print("Game over!")
     for player in game_state.players:
-        game_state.update_scoreboard(player)
+        game_state.update_scoreboard()
+
     for player in game_state.players:
-        if (game_state.scoreboard.get(player) or 0) > previous_score: 
+        player_score = game_state.scoreboard.get(player.name, 0)
+        if player_score > previous_score:
             winner = player.name
-        previous_score = game_state.scoreboard.get(player)
+            previous_score = player_score
+        elif player_score == previous_score:
+            winner = None
+
     if winner:
         print(f"The winner is {winner}!")
     else:

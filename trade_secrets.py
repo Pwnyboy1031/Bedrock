@@ -14,9 +14,10 @@ class Trade_Secrets(Card):
             user_selection = input().strip()
         selectedOpponent = game_state.players[int(user_selection)-1]
         for rand_card_index in range(2):
-            rand_card_index = selectedOpponent.hand.index(choice(selectedOpponent.hand))
-            card = selectedOpponent.hand[rand_card_index]
-            selectedOpponent.hand.pop(rand_card_index)
-            (game_state.current_player().hand).append(card)
-            print(f"{(game_state.current_player().name)} stole {card.name} from {selectedOpponent.name}!")
+            if selectedOpponent.hand:
+                rand_card_index = selectedOpponent.hand.index(choice(selectedOpponent.hand))
+                card = selectedOpponent.hand[rand_card_index]
+                selectedOpponent.hand.pop(rand_card_index)
+                game_state.current_player().hand.append(card)
+                print(f"{(game_state.current_player().name)} stole {card.name} from {selectedOpponent.name}!")
 

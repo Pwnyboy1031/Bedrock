@@ -19,10 +19,11 @@ class GameState:
     def current_player(self):
         return self.players[self.current_player_index]
     
-    def update_scoreboard(self, player):
-        self.scoreboard[player.name] = 0
-        for treasure in player.hoard:
-            self.scoreboard[player.name] += treasure.points
+    def update_scoreboard(self):
+        for player in self.players:
+            self.scoreboard[player.name] = 0
+            for treasure in player.hoard:
+                self.scoreboard[player.name] += treasure.points
         print(f"The scoreboard has been updated\n{self.scoreboard}")
     
     def get_scores(self):
