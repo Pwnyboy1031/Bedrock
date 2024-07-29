@@ -84,15 +84,26 @@ def validate_card_in_hand(player, card_indices, game_state):
     return True
         
 def validate_play(player, card_indices, game_state):
-    if len(card_indices) > 2 or any(isinstance(player.hand[(index)], Treasure) for index in card_indices):
-        print("Invalid input. You can play up to 2 non-treasure cards")
-        return False
-    return True
+    if len(card_indices) > 2:
+        print("Invalid input. You can play up to 2 non-treasure cards.")
+        return(False)
+    
+    for index in card_indices:
+        if index >= len(player.hand) or any(isinstance(player.hand[(index)], Treasure) for index in card_indices):
+            print("Invalid input. Ensure your selections are valid, non-treasure cards.")
+            print()
+            return False
+        return True
 
 def validate_treasure(player, card_indices, game_state):
-    if len(card_indices) > 2 or any(not isinstance(player.hand[(index)], Treasure) for index in card_indices):
-        print("Invalid input. You can play up to 2 treasure cards")
+    if len(card_indices) > 2:
+        print("Invalid input. You can play up to 2 treasure cards.")
         return False
+    for index in card_indices:
+        if index >= len(player.hand) or not isinstance(player.hand[index], Treasure):
+            print("Invalid input. Ensure your selections are valid, treasure cards.")
+            print()
+            return False
     return True
     
 def validate_hoard(player, card_indices):
