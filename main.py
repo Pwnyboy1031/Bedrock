@@ -1,5 +1,5 @@
-import game_logic
-from game_logic import take_turn
+import game.game_logic as game_logic
+from game.game_logic import take_turn
 
 
         
