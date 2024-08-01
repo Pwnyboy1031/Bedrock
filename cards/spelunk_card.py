@@ -1,4 +1,4 @@
-from scry_Card import ScryCard
+from cards.scry_Card import ScryCard
 
 class Spelunk(ScryCard):
     def __init__(self):

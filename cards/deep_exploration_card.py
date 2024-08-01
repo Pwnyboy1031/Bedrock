@@ -1,4 +1,4 @@
-from card import Card
+from cards.card import Card
 
 class Deep_Exploration(Card):
     def __init__(self):

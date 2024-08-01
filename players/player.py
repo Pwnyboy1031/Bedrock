@@ -1,6 +1,6 @@
 from colorama import init, Fore, Style
-from hard_hat_card import Hard_Hat
-from treasure_cards import *
+from cards.hard_hat_card import Hard_Hat
+from cards.treasure_cards import *
 
 init()
 class Player:
@@ -9,6 +9,8 @@ class Player:
         self.hand = []
         self.hoard = []
 
+    def make_decision(self, decision_function_name = None):
+        return input().strip()
     
     def add_card_to_hand(self, card):
         self.hand.append(card)

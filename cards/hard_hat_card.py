@@ -1,4 +1,5 @@
-from card import Card
+from cards.card import Card
+from players.player import player
 
 class Hard_Hat(Card):
     def __init__(self):
@@ -7,5 +8,6 @@ class Hard_Hat(Card):
     def apply_effect(self, game_state):
         game_state.current_player().display_hoard()
         print("Select which treasure to attach Hard Hat to.")
-        selected_treasure_index = int(input().strip())
-        game_state.current_player().hoard[selected_treasure_index -1 ].attachments.append(self)
+        selected_treasure = int(player.make_decision("choose_from_set(player.hoard)"))
+        selected_treasure_index = game_state.current_player().hoard.index(selected_treasure)
+        game_state.current_player().hoard[selected_treasure_index - 1 ].attachments.append(self)

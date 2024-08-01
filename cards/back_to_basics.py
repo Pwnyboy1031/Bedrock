@@ -1,4 +1,4 @@
-from card import Card
+from cards.card import Card
 import players.player as player
 
 

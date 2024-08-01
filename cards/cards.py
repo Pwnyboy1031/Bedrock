@@ -1,19 +1,19 @@
-from shovel_card import Shovel
-from pickaxe_card import Pickaxe
-from spelunk_card import Spelunk
-from survey_card import Survey
-from prospect_card import Prospect
-from investment_card import Investment
-from treasure_cards import *
-from bedrock_card import Bedrock
-from deep_exploration_card import Deep_Exploration
-from back_to_basics import Back_To_Basics
-from trade_secrets import Trade_Secrets
-from tunnel_collapse import Tunnel_Collapse
-from pilfer_card import Pilfer
-from hard_hat_card import Hard_Hat
-from earthquake_card import Earthquake
-from taxes_card import Taxes
+from cards.shovel_card import Shovel
+from cards.pickaxe_card import Pickaxe
+from cards.spelunk_card import Spelunk
+from cards.survey_card import Survey
+from cards.prospect_card import Prospect
+from cards.investment_card import Investment
+from cards.treasure_cards import *
+from cards.bedrock_card import Bedrock
+from cards.deep_exploration_card import Deep_Exploration
+from cards.back_to_basics import Back_To_Basics
+from cards.trade_secrets import Trade_Secrets
+from cards.tunnel_collapse import Tunnel_Collapse
+from cards.pilfer_card import Pilfer
+from cards.hard_hat_card import Hard_Hat
+from cards.earthquake_card import Earthquake
+from cards.taxes_card import Taxes
 
 def initialize_cards():
     shovel_cards = [Shovel() for _ in range(10)] 

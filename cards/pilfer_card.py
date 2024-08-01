@@ -1,6 +1,6 @@
-from card import Card
+from cards.card import Card
 from random import choice
-from hard_hat_card import Hard_Hat
+from cards.hard_hat_card import Hard_Hat
 
 class Pilfer(Card):
     def __init__(self):

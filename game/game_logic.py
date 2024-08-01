@@ -1,9 +1,10 @@
 import sys
+from players.ai_player import AIPlayer
 from players.player import Player
 from game.deck import Deck
 from game.game_state import GameState
-from treasure_cards import Treasure
-from hard_hat_card import Hard_Hat
+from cards.treasure_cards import Treasure
+from cards.hard_hat_card import Hard_Hat
 
 
 def draw_card(game_state):
@@ -62,7 +63,7 @@ def deal_starting_hands(game_state):
 def initialize_game():
     # Define players
     player1 = Player("Player 1")
-    player2 = Player("Player 2")
+    player2 = AIPlayer("Player 2")
     players = [player1, player2]
 
     # initialize deck and shuffle
@@ -117,7 +118,11 @@ def choose_cards_to_play(player, game_state):
         player.display_hand()
         print(f"{game_state.phase} Phase")
         print("Enter selection for 1 card or 'selection, selection' for 2 cards.")
-        user_selection = input().strip()
+        if game_state.phase == "Treasure":
+            user_selection = player.make_decision("choose_treasure_in_hand")
+        elif game_state.phase == "Main":
+            user_selection = player.make_decision("choose_action_card_in_hand")
+
         if not user_selection:
             return [] # return empty list if no input
         card_indices = [int(index) - 1 for index in user_selection.split(',')]

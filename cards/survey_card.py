@@ -1,4 +1,4 @@
-from scry_Card import ScryCard
+from cards.scry_Card import ScryCard
 
 class Survey(ScryCard):
     def __init__(self):
