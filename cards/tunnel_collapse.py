@@ -10,4 +10,3 @@ class Tunnel_Collapse(Card):
 
         game_state.discard_pile.clear()
         game_state.deck.shuffle()
-        print(f"DEBUG: {game_state.discard_pile}")

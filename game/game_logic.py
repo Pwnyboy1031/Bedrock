@@ -9,7 +9,10 @@ from cards.hard_hat_card import Hard_Hat
 
 def draw_card(game_state):
     card = game_state.deck.draw_card()
-    print(game_state.current_player().name,"drew:", card.name)
+    if not isinstance(game_state.current_player(), AIPlayer):
+        print(game_state.current_player().name,"drew:", card.name)
+    else:
+        print(f"{game_state.current_player().name} drew a card")
     if card.name == "Bedrock":
         card.apply_effect(game_state)
         return
@@ -115,9 +118,11 @@ def validate_hoard(player, card_indices):
 
 def choose_cards_to_play(player, game_state):
     while True:
-        player.display_hand()
+        if not isinstance(player, AIPlayer):
+            player.display_hand()
         print(f"{game_state.phase} Phase")
-        print("Enter selection for 1 card or 'selection, selection' for 2 cards.")
+        if not isinstance(player, AIPlayer):
+            print("Enter selection for 1 card or 'selection, selection' for 2 cards.")
         if game_state.phase == "Treasure":
             user_selection = player.make_decision("choose_treasure_in_hand")
         elif game_state.phase == "Main":
@@ -125,6 +130,7 @@ def choose_cards_to_play(player, game_state):
 
         if not user_selection:
             return [] # return empty list if no input
+
         card_indices = [int(index) - 1 for index in user_selection.split(',')]
 
         # Check turn phase
@@ -163,7 +169,7 @@ def take_turn(game_state):
     # Prompt user for treasure cards to play
     selected_indices = choose_cards_to_play(current_player, game_state)
     if not selected_indices:
-        print("No cards selected. Ending turn")
+        print("No cards selected. Moving to Main phase")
         game_state.phase = game_state.phases[1]
     else: 
         selected_cards = [current_player.hand[index] for index in selected_indices]

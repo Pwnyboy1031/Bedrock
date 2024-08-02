@@ -9,7 +9,8 @@ class Bedrock(Card):
         from game.game_logic import draw_card, game_over
         print("BEDROCK!")
         if game_state.deep_exploration_active == True:
-            game_state.deck.add_card_to_top(game_state.deck, self)
+            print(f"BEDROCK COUNT IS NOW {game_state.bedrock_count}")
+            game_state.deck.add_card_to_top(self)
             game_state.deck.shuffle()
             game_state.deep_exploration_active = False
             return

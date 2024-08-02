@@ -1,16 +1,16 @@
 from players.player import Player
 from game.game_state import GameState
 from cards.treasure_cards import Treasure
-from random import random, choice, sample
+from random import random, choice, sample, randint
 
 class AIPlayer(Player):
     def __init__(self, name):
         super().__init__(name)
 
-    def make_decision(self, decision_function_name):
+    def make_decision(self, decision_function_name, *args):
        method = getattr(self, decision_function_name, None)
        if method:
-           return method()
+           return method(*args)
        else:
            print(f"Error: Method {decision_function_name} not found")
            return None
@@ -64,12 +64,23 @@ class AIPlayer(Player):
     def scry(game_state):
         pass
 
-    def choose_from_set(set):
-        choice = choice(set)
-        return choice
+    def choose_from_set(self, options):
+        # Pick a random index (1-based) from the options list
+        chosen_index = randint(1, len(options))  # Choose between 1 and the number of options
+        return str(chosen_index)
 
-    def choose_opponent(game_state):
-        pass
+    def choose_opponent(self, game_state):
+        for index, player, in enumerate(game_state.players):
+            if index != game_state.current_player_index:
+                return str(index + 1)
 
     def choose_hard_hat_target(game_state):
         pass
+
+    def choose_lowest_treasure(self, set):
+        lowest = 5
+        for index, treasure, in enumerate(set):
+            if treasure.points < lowest:
+                lowest = index
+        return str(lowest + 1)
+        

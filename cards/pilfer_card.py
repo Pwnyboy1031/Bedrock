@@ -23,4 +23,3 @@ class Pilfer(Card):
         game_state.current_player().hoard.append(random_treasure)
 
         print(f"{game_state.current_player().name} Stole {random_treasure.name} from {opponent.name}")
-        print(f"Debug Message: {game_state.current_player().name}'s hoard: {[t.name for t in game_state.current_player().hoard]}")

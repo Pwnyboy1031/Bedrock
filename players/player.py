@@ -9,8 +9,9 @@ class Player:
         self.hand = []
         self.hoard = []
 
-    def make_decision(self, decision_function_name = None):
+    def make_decision(self, decision_function_name = None, *args):
         return input().strip()
+    
     
     def add_card_to_hand(self, card):
         self.hand.append(card)

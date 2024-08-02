@@ -11,7 +11,7 @@ class Investment(Card):
         player = game_state.current_player()
         player.display_hoard()
         print("Enter selection for 1 card or 'selection, selection,....' for multiple cards.")
-        user_selection = input().strip()
+        user_selection = player.make_decision("choose_lowest_treasure", player.hoard)
 
         if not user_selection:
             return [] # return empty list if no input
@@ -24,6 +24,7 @@ class Investment(Card):
                 card = player.hoard[index]
                 if self.check_hard_hat(card):
                     print(f"{game_state.current_player().hoard[card]} is being protected by Hard Hat. Your target fizzles.")
+                    return
                 else:
                     valid_indices.append(index)
 
