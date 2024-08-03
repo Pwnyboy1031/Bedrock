@@ -4,7 +4,7 @@ from cards.hard_hat_card import Hard_Hat
 
 class Pilfer(Card):
     def __init__(self):
-        super().__init__("Pilfer", "Take a random treasure from target opponent's hoard and add it to your own")
+        super().__init__("Pilfer", "Take a random treasure from target opponent's hoard and add it to your hand.")
 
     def apply_effect(self, game_state):
         opponent = self.choose_opponent(game_state)
@@ -20,6 +20,6 @@ class Pilfer(Card):
             
         random_treasure = choice(unprotected_treasures)
         opponent.hoard.remove(random_treasure)
-        game_state.current_player().hoard.append(random_treasure)
+        game_state.current_player().add_card_to_hand(random_treasure)
 
         print(f"{game_state.current_player().name} Stole {random_treasure.name} from {opponent.name}")
