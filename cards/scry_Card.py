@@ -4,7 +4,7 @@ from game.game_state import GameState
 
 class ScryCard(Card):
     def __init__(self, name, scry_number):
-        super().__init__(name, f"Scry {scry_number}")
+        super().__init__(name, f"Scry {scry_number}.")
         self.scry_number = scry_number
 
 

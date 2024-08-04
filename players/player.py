@@ -35,7 +35,8 @@ class Player:
             print(f"- {self.name}'s hoard - ({value})")
             for index, card in enumerate(self.hoard):
                 color = self.get_card_color(card)
-                print(f"{index + 1}. {color}{card.name}{Style.RESET_ALL}")
+                attachment_info = f"{Fore.YELLOW}[Attached: {', '.join(att.name for att in card.attachments)}]" if card.attachments else ""
+                print(f"{index + 1}. {color}{card.name} {attachment_info}{Style.RESET_ALL}")
     
     def get_card_color(self, card):
         if isinstance(card, Ruby):

@@ -49,6 +49,7 @@ def play_cards(game_state, cards):
                 add_to_discard_pile(game_state, card)
         except ValueError:
             print("Card not found in player's hand:", card)
+            print("Current hand:", [c.name for c in game_state.current_player().hand])
         
 
 def deal_starting_hands(game_state):

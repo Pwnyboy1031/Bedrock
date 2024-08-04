@@ -23,7 +23,7 @@ class Investment(Card):
             for index in card_indices:
                 card = player.hoard[index]
                 if self.check_hard_hat(card):
-                    print(f"{game_state.current_player().hoard[card]} is being protected by Hard Hat. Your target fizzles.")
+                    print(f"{card.name} is being protected by Hard Hat. Your target fizzles.")
                     return
                 else:
                     valid_indices.append(index)

@@ -3,7 +3,7 @@ from cards.card import Card
 
 class Treasure(Card):
     def __init__(self, name, points):
-        super().__init__(name, f"This Treasure is worth {points} point(s) at the end of the game if it is in your hoard")
+        super().__init__(name, f"This Treasure is worth {points} point(s) at the end of the game if it is in your hoard.")
         self.points = points
         self.name = name
         self.attachments = []

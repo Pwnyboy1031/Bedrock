@@ -2,7 +2,7 @@ from cards.card import Card
 
 class Taxes(Card):
     def __init__(self):
-        super().__init__("Taxes", "Each player chooses and discards a Treasure from their hoard")
+        super().__init__("Taxes", "Each player chooses and discards a Treasure from their hoard.")
     
     def apply_effect(self, game_state):
         from game.game_logic import validate_hoard
@@ -31,9 +31,9 @@ class Taxes(Card):
             if validate_hoard(player, selected_index_list):
                 card = player.hoard[selected_index]
                 while self.check_hard_hat(card):
-                    print(f"{game_state.current_player().hoard[card]} is being protected by Hard Hat. Choose another card.")
+                    print(f"{card.name} is being protected by Hard Hat. Choose another card.")
                     player.display_hoard()
-                    user_selection = player.make_decision("choose_from_set", player.hoard)
+                    card = [int(player.make_decision("choose_from_set", player.hoard))]
                 game_state.discard_pile.append(card)
                 player.hoard.pop(selected_index)
                 

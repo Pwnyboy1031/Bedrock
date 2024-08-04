@@ -22,4 +22,4 @@ class Pilfer(Card):
         opponent.hoard.remove(random_treasure)
         game_state.current_player().add_card_to_hand(random_treasure)
 
-        print(f"{game_state.current_player().name} Stole {random_treasure.name} from {opponent.name}")
+        print(f"{game_state.current_player().name} stole {random_treasure.name} from {opponent.name}")
