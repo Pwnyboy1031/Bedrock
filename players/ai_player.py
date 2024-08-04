@@ -9,6 +9,8 @@ class AIPlayer(Player):
 
     def make_decision(self, decision_function_name, *args):
        method = getattr(self, decision_function_name, None)
+       if decision_function_name == "choose_treasure_to_discard":
+           return self.choose_random_hoard_treasure()
        if method:
            return method(*args)
        else:
@@ -73,14 +75,14 @@ class AIPlayer(Player):
         for index, player, in enumerate(game_state.players):
             if index != game_state.current_player_index:
                 return str(index + 1)
+            
+    def choose_random_hoard_treasure(self):
+        #choose random card to discard
+        if not self.hoard:
+            return []
+        selection = choice(self.hoard)
+        selection_index = self.hoard.index(selection)
+        return str(selection_index + 1)
 
     def choose_hard_hat_target(game_state):
         pass
-
-    def choose_lowest_treasure(self, set):
-        lowest = 5
-        for index, treasure, in enumerate(set):
-            if treasure.points < lowest:
-                lowest = index
-        return str(lowest + 1)
-        

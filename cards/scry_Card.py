@@ -17,6 +17,7 @@ class ScryCard(Card):
             print("Select a card")
             reveal_cards(options)
             choice = int(game_state.current_player().make_decision("choose_from_set", options)) - 1
+
             selected_card = options[choice]
             print(f"Would you like to place {selected_card.name} on:\n 1. Top of the deck\n 2. Bottom of the deck")
             placement_selection = game_state.current_player().make_decision("choose_from_set", [1,2])

@@ -11,7 +11,7 @@ class Investment(Card):
         player = game_state.current_player()
         player.display_hoard()
         print("Enter selection for 1 card or 'selection, selection,....' for multiple cards.")
-        user_selection = player.make_decision("choose_lowest_treasure", player.hoard)
+        user_selection = player.make_decision("choose_treasure_to_discard", player.hoard)
 
         if not user_selection:
             return [] # return empty list if no input

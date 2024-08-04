@@ -1,5 +1,6 @@
 import sys
 from players.ai_player import AIPlayer
+from players.ai_player_level_1 import AI_PLayer_Level_1
 from players.player import Player
 from game.deck import Deck
 from game.game_state import GameState
@@ -66,9 +67,12 @@ def deal_starting_hands(game_state):
 
 def initialize_game():
     # Define players
-    player1 = Player("Player 1")
+    #player1 = Player("Taylor")
+    player1 = AIPlayer("Player 1")
     player2 = AIPlayer("Player 2")
-    players = [player1, player2]
+    player3 = AIPlayer("Player 3")
+    player4 = AI_PLayer_Level_1("Player 4")
+    players = [player1, player2, player3, player4]
 
     # initialize deck and shuffle
     deck = Deck()

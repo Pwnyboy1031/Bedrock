@@ -19,11 +19,11 @@ class Taxes(Card):
 
             print(f"{player.name}, choose a treasure to discard from your hoard")
             player.display_hoard()
-            user_selection = player.make_decision("choose_lowest_treasure", player.hoard)
+            user_selection = player.make_decision("choose_treasure_to_discard", player.hoard)
 
             while not user_selection or not user_selection.isdigit():
                 print("You must choose a treasure to discard.")
-                user_selection = player.make_decision("choose_lowest_treasure", player.hoard)
+                user_selection = player.make_decision("choose_treasure_to_discard", player.hoard)
 
             selected_index = int(user_selection) - 1
             selected_index_list = [selected_index]
