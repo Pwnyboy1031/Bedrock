@@ -87,9 +87,9 @@ def initialize_game():
     # Define players
     #player1 = Player("Taylor")
     player1 = AI_Player_Level_1("Player 1")
-    player2 = AIPlayer("Player 2")
-    player3 = AIPlayer("Player 3")
-    player4 = AIPlayer("Player 4")
+    player2 = AI_Player_Level_1("Player 2")
+    player3 = AI_Player_Level_1("Player 3")
+    player4 = AI_Player_Level_1("Player 4")
     players = [player1, player2, player3, player4]
 
     # initialize deck and shuffle

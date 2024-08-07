@@ -1,10 +1,13 @@
 from cards.card import Card
 
 class Taxes(Card):
+    played_count = 0
+
     def __init__(self):
         super().__init__("Taxes", "Each player chooses and discards a Treasure from their hoard.")
     
     def apply_effect(self, game_state):
+        Taxes.played_count += 1
         from game.game_logic import validate_hoard
         for player in game_state.players:
             if not player.hoard:

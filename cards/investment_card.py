@@ -2,10 +2,13 @@ from cards.card import Card
 
 
 class Investment(Card):
+    played_count = 0
+
     def __init__(self):
         super().__init__("Investment", "Remove X treasures from your hoard. Draw double X cards.")
 
     def apply_effect(self, game_state):
+        Investment.played_count += 1
         from game.game_logic import add_to_discard_pile, validate_hoard, remove_from_hoard, draw_card
 
         player = game_state.current_player()

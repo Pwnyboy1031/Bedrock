@@ -3,10 +3,13 @@ from random import choice
 from cards.hard_hat_card import Hard_Hat
 
 class Pilfer(Card):
+    played_count = 0
+
     def __init__(self):
         super().__init__("Pilfer", "Take a random treasure from target opponent's hoard and add it to your hand.")
 
     def apply_effect(self, game_state):
+        Pilfer.played_count += 1
         opponent = self.choose_opponent(game_state)
         if not opponent.hoard:
             print("Your opponent's hoard is empty")
