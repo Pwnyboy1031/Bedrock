@@ -16,7 +16,8 @@ class Deck:
        return random.shuffle(self.cards)
 
     def draw_card(self):
-        return self.cards.pop(0)
+        if self.cards:
+            return self.cards.pop(0)
     
     def reveal_top_cards(self, num_cards):
         revealed_cards = self.cards[:num_cards]

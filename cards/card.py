@@ -20,7 +20,8 @@ class Card:
     @staticmethod
     def check_hard_hat(target):
         from cards.hard_hat_card import Hard_Hat 
-        for attachment in target.attachments:
-            if isinstance(attachment, Hard_Hat):
-                return True
+        if target.attachments:
+            for attachment in target.attachments:
+                if isinstance(attachment, Hard_Hat):
+                    return True
         return False

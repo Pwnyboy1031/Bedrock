@@ -1,14 +1,24 @@
 import sys
 from players.ai_player import AIPlayer
-from players.ai_player_level_1 import AI_PLayer_Level_1
+from players.ai_player_level_1 import AI_Player_Level_1
 from players.player import Player
 from game.deck import Deck
 from game.game_state import GameState
 from cards.treasure_cards import Treasure
 from cards.hard_hat_card import Hard_Hat
+from cards.cards import Bedrock
+
 
 
 def draw_card(game_state):
+    if not game_state.deck.cards:
+        for card in game_state.discard_pile:
+            game_state.deck.add_card_to_top(card)
+        game_state.discard_pile.clear()
+        game_state.deck.shuffle()
+    if not game_state.deck.cards:
+        game_state.game_over = True
+        return
     card = game_state.deck.draw_card()
     if not isinstance(game_state.current_player(), AIPlayer):
         print(game_state.current_player().name,"drew:", card.name)
@@ -16,8 +26,8 @@ def draw_card(game_state):
         print(f"{game_state.current_player().name} drew a card")
     if card.name == "Bedrock":
         card.apply_effect(game_state)
-        return
-    game_state.current_player().add_card_to_hand(card)
+    else:
+        game_state.current_player().add_card_to_hand(card)
     
 
 
@@ -54,24 +64,32 @@ def play_cards(game_state, cards):
         
 
 def deal_starting_hands(game_state):
-    for _ in range(5):
-        for player in game_state.players: 
-            draw_card(game_state)
-            game_state.next_turn()
-            if game_state.bedrock_count >= 1:
-                from main import main
-                print("Bedrock drawn in opening hand, restarting game")
-                # restart game if bedrock is drawn
-                main()
-                return
+    num_cards_to_draw = 5  # Example number of starting cards
+
+    for player in game_state.players:
+        starting_hand = []
+        while len(starting_hand) < num_cards_to_draw:
+            card = game_state.deck.draw_card()  # Assuming a method to draw a card
+
+            if isinstance(card, Bedrock):
+                # Handle bedrock card by putting it back into the deck
+                game_state.deck.add_card_to_top(card)
+                game_state.deck.shuffle()
+            else:
+                starting_hand.append(card)
+
+        player.hand = starting_hand  # Assign the valid starting hand
+
+
+
 
 def initialize_game():
     # Define players
     #player1 = Player("Taylor")
-    player1 = AIPlayer("Player 1")
+    player1 = AI_Player_Level_1("Player 1")
     player2 = AIPlayer("Player 2")
     player3 = AIPlayer("Player 3")
-    player4 = AI_PLayer_Level_1("Player 4")
+    player4 = AIPlayer("Player 4")
     players = [player1, player2, player3, player4]
 
     # initialize deck and shuffle
@@ -131,7 +149,7 @@ def choose_cards_to_play(player, game_state):
         if game_state.phase == "Treasure":
             user_selection = player.make_decision("choose_treasure_in_hand")
         elif game_state.phase == "Main":
-            user_selection = player.make_decision("choose_action_card_in_hand")
+            user_selection = player.make_decision("choose_action_card_in_hand", game_state)
 
         if not user_selection:
             return [] # return empty list if no input
@@ -167,6 +185,8 @@ def take_turn(game_state):
     print()
     # draw card for turn player
     draw_card(game_state)
+    if game_state.game_over:
+        return True
 
     # Treasure phase
     game_state.phase = game_state.phases[0]
@@ -180,6 +200,8 @@ def take_turn(game_state):
         selected_cards = [current_player.hand[index] for index in selected_indices]
         play_cards(game_state, selected_cards)
         game_state.phase = game_state.phases[1]
+    if game_state.game_over:
+        return True
 
     selected_indices = choose_cards_to_play(current_player, game_state)
     # Main Phase
@@ -189,31 +211,61 @@ def take_turn(game_state):
     else: 
         selected_cards = [current_player.hand[index] for index in selected_indices]
         play_cards(game_state, selected_cards)
+    if game_state.game_over:
+        return True
         
 
     game_state.next_turn()
     print()
     game_state.display_discard_pile()
+    
+    return False
 
 def game_over(game_state):
-    game_state.game_over = True
-    previous_score = 0
-    winner = None
-    print("Game over!")
-    for player in game_state.players:
+    # Update the scoreboard based on the current state
+    game_state.update_scoreboard()
+    scores = game_state.get_scores()
+    max_score = max(scores.values())
+    winners = [player for player, score in scores.items() if score == max_score]
+
+    # Check for a tie
+    if len(winners) > 1:
+        # Check if the deck is empty to prevent further play
+        if not game_state.deck.cards:
+            print("Tie detected and no cards left in the deck. The game ends in a tie.")
+            game_state.game_over = True  # Explicitly set game over
+            return "Tie", max_score
+
+        print("Tie detected. Resolving tie.")
+
+        # Shuffle discard pile back into the deck and add an extra Bedrock card
+        bedrock_card = Bedrock()
+
+        # Add discard pile back to the deck
+        game_state.deck.cards.extend(game_state.discard_pile)
+        game_state.discard_pile = []
+
+        # Add an extra Bedrock card
+        game_state.deck.add_card_to_top(bedrock_card)
+        game_state.deck.shuffle()
+
+        # Reset the game state for tie-breaker
+        game_state.game_over = False
+        game_state.bedrock_count = 0
+
+        # Reset scores if needed
         game_state.update_scoreboard()
 
-    for player in game_state.players:
-        player_score = game_state.scoreboard.get(player.name, 0)
-        if player_score > previous_score:
-            winner = player.name
-            previous_score = player_score
-        elif player_score == previous_score:
-            winner = None
+        print("Starting tie-breaker round.")
+        return None
 
-    if winner:
-        print(f"The winner is {winner}!")
     else:
-        print("Tie Game!")
-    wait = input()
-    sys.exit()
+        # If there is a clear winner
+        winner = winners[0]
+        winner_score = scores[winner]
+        print(f"The winner is {winner} with a score of {winner_score}!")
+        game_state.game_over = True  # Mark the game as complete
+        return winner, winner_score
+
+
+

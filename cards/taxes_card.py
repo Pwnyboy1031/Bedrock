@@ -33,7 +33,8 @@ class Taxes(Card):
                 while self.check_hard_hat(card):
                     print(f"{card.name} is being protected by Hard Hat. Choose another card.")
                     player.display_hoard()
-                    card = [int(player.make_decision("choose_from_set", player.hoard))]
+                    selected_index = int(player.make_decision("choose_from_set", player.hoard))
+                    card = player.hoard[selected_index - 1]
                 game_state.discard_pile.append(card)
-                player.hoard.pop(selected_index)
+                player.hoard.pop(selected_index - 1)
                 

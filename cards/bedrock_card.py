@@ -17,7 +17,7 @@ class Bedrock(Card):
         game_state.bedrock_count += 1
         print(f"BEDROCK COUNT IS NOW {game_state.bedrock_count}")
         if game_state.bedrock_count >= game_state.bedrock_limit:
-            game_over(game_state)# end game    
+            game_state.game_over = True   
         else:
             game_state.deck.add_card_to_top(self)  
             game_state.deck.shuffle()

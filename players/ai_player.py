@@ -40,7 +40,7 @@ class AIPlayer(Player):
         return indices_string
 
 
-    def choose_action_card_in_hand(self):
+    def choose_action_card_in_hand(self, game_state):
         #choose spells to play during main phase
         action_cards = [card for card in self.hand if not isinstance(card, Treasure)]
 
