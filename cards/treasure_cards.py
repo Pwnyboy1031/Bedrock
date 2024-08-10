@@ -15,7 +15,6 @@ class Treasure(Card):
     
 class Ruby(Treasure):
     played_count = 0
-
     def __init__(self):
         super().__init__("Ruby", 1)
     def apply_effect(self, game_state):

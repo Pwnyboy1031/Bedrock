@@ -12,6 +12,8 @@ class AI_Player_Level_1(AIPlayer):
             return self.choose_action_card_in_hand(*args)
         if decision_function_name == "choose_treasure_to_discard":
             return self.choose_lowest_treasure(*args)
+        if decision_function_name == "choose_opponent":
+            return self.choose_winning_opponent(*args)
         if method:
             return method(*args)
         else:
@@ -100,8 +102,7 @@ class AI_Player_Level_1(AIPlayer):
     
     def is_winning(self, game_state):
         winning_score = 0
-        self_score = game_state.scoreboard.get(self.name, 0
-                                               )
+        self_score = game_state.scoreboard.get(self.name, 0)
         for player, score in game_state.scoreboard.items():
             if score > winning_score:
                 winning_score = score
@@ -113,6 +114,7 @@ class AI_Player_Level_1(AIPlayer):
         for card in set:
             if card.points < lowest:
                 lowest_index = set.index(card)
+                lowest = card.points
         return str(lowest_index + 1)
     
     def choose_highest_treasure(self, set):
@@ -122,3 +124,15 @@ class AI_Player_Level_1(AIPlayer):
             if card.points > highest:
                 highest_index = set.index(card)
         return str(highest_index + 1) 
+    
+    def choose_winning_opponent(self, game_state):
+        winning_player_index = -1
+        opponents = []
+        for index, player in enumerate(game_state.players):
+            if index != game_state.current_player_index:
+                opponents.append(player)
+        for player in opponents:
+            if player.is_winning(game_state):
+                winning_player_index = game_state.players.index(player)
+
+        return str(winning_player_index + 1)

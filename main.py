@@ -12,7 +12,7 @@ def main():
   #  while game_state.game_over == False:
     #    take_turn(game_state)
 
-    num_simulations = 1000
+    num_simulations = 2
     results = run_simulation(num_simulations)
     save_results_to_file(results)
     print(f"Simulation completed. Results saved to simulation_results.json")

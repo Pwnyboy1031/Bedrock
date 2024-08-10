@@ -72,9 +72,11 @@ class AIPlayer(Player):
         return str(chosen_index)
 
     def choose_opponent(self, game_state):
+        opponents = []
         for index, player, in enumerate(game_state.players):
             if index != game_state.current_player_index:
-                return str(index + 1)
+                opponents.append(index)
+        return str(choice(opponents) + 1)
             
     def choose_random_hoard_treasure(self):
         #choose random card to discard

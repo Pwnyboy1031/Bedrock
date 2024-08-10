@@ -1,6 +1,7 @@
 from cards.card import Card
 from random import choice
 from cards.hard_hat_card import Hard_Hat
+from players.player import Player
 
 class Pilfer(Card):
     played_count = 0
@@ -10,7 +11,7 @@ class Pilfer(Card):
 
     def apply_effect(self, game_state):
         Pilfer.played_count += 1
-        opponent = self.choose_opponent(game_state)
+        opponent = game_state.players[int(game_state.current_player().make_decision("choose_opponent", game_state))-1]
         if not opponent.hoard:
             print("Your opponent's hoard is empty")
             return 
