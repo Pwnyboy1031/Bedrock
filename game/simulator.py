@@ -36,6 +36,9 @@ def run_simulation(num_games):
         for card_class in Card.__subclasses__() + Treasure.__subclasses__():
             results['card_play_counts'][card_class.__name__] += card_class.played_count
 
+            #reset card counts
+            card_class.played_count = 0
+
         for player, score in game_state.get_scores().items():
             results['scores'][player].append(score)
             
