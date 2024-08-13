@@ -184,10 +184,11 @@ def take_turn(game_state):
     for player in game_state.players:
         player.display_hoard()
     print()
-    # draw card for turn player
-    draw_card(game_state)
-    if game_state.game_over:
-        return True
+    # draw card for turn player unless it's the first turn
+    if not game_state.turns == 1:
+        draw_card(game_state)
+        if game_state.game_over:
+            return True
 
     # Treasure phase
     game_state.phase = game_state.phases[0]

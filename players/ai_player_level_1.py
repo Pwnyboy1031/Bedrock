@@ -126,7 +126,7 @@ class AI_Player_Level_1(AIPlayer):
         return str(highest_index + 1) 
     
     def choose_winning_opponent(self, game_state):
-        winning_player_index = -1
+        winning_player_index = None
         opponents = []
         for index, player in enumerate(game_state.players):
             if index != game_state.current_player_index:
@@ -134,5 +134,9 @@ class AI_Player_Level_1(AIPlayer):
         for player in opponents:
             if player.is_winning(game_state):
                 winning_player_index = game_state.players.index(player)
+
+        if winning_player_index == None:
+            randomOpponent = choice(opponents)
+            winning_player_index = game_state.players.index(randomOpponent)
 
         return str(winning_player_index + 1)
