@@ -169,6 +169,7 @@ def choose_cards_to_play(player, game_state):
 def take_turn(game_state):
     # define current player's turn from game state
     current_player = game_state.current_player()
+    game_state.turns += 1
 
     # Announce turn player
     print()
@@ -227,6 +228,7 @@ def game_over(game_state):
     scores = game_state.get_scores()
     max_score = max(scores.values())
     winners = [player for player, score in scores.items() if score == max_score]
+    rounds = game_state.turns / len(game_state.players)
 
     # Check for a tie
     if len(winners) > 1:
@@ -234,7 +236,7 @@ def game_over(game_state):
         if not game_state.deck.cards:
             print("Tie detected and no cards left in the deck. The game ends in a tie.")
             game_state.game_over = True  # Explicitly set game over
-            return "Tie", max_score
+            return "Tie", max_score, rounds
 
         print("Tie detected. Resolving tie.")
 
@@ -265,7 +267,7 @@ def game_over(game_state):
         winner_score = scores[winner]
         print(f"The winner is {winner} with a score of {winner_score}!")
         game_state.game_over = True  # Mark the game as complete
-        return winner, winner_score
+        return winner, winner_score, rounds
 
 
 

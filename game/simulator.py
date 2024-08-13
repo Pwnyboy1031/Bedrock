@@ -21,14 +21,17 @@ def run_simulation(num_games):
         'games_played': 0,
         'wins':defaultdict(int),
         'card_play_counts':defaultdict(int),
-        'scores':defaultdict(list)
-        
+        'scores':defaultdict(list),
+        'avg_rounds': 0
     }
+
+    total_rounds = 0
 
     for _ in range(num_games):
         game_state = game.game_logic.initialize_game()
         
-        winner, winner_score = run_game(game_state)
+        winner, winner_score, rounds = run_game(game_state)
+        total_rounds += rounds
 
         results['games_played'] += 1
         results['wins'][winner] += 1
@@ -41,5 +44,7 @@ def run_simulation(num_games):
 
         for player, score in game_state.get_scores().items():
             results['scores'][player].append(score)
+
+        results['avg_rounds'] = total_rounds / num_games
             
     return results

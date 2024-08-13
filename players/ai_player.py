@@ -88,3 +88,11 @@ class AIPlayer(Player):
 
     def choose_hard_hat_target(game_state):
         pass
+
+    def is_winning(self, game_state):
+        winning_score = 0
+        self_score = game_state.scoreboard.get(self.name, 0)
+        for player, score in game_state.scoreboard.items():
+            if score > winning_score:
+                winning_score = score
+        return self_score == winning_score
